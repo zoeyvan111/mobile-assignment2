@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { database } from "./firebase/firebase-setup";
+import { DefaultTheme } from "@react-navigation/native";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import StackNavigation from "./component/navigator/StackNavigation";
+import { StatusBar } from "react-native";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const TabNavigator = createBottomTabNavigator();
+
+const MyTheme = {
+  ...DefaultTheme,
+  dark: true,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "purple",
+    background: "#817bc7",
   },
-});
+};
+
+const App = () => {
+  return (
+    <NavigationContainer theme={MyTheme}>
+      <StatusBar barStyle="light-content" backgroundColor="#424497" />
+      <StackNavigation />
+    </NavigationContainer>
+  );
+};
+
+export default App;
